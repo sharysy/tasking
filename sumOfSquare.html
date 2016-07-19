@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sumOfSquare</title>
+</head>
+<script type="text/javascript">
+    function calculaSumOfSquare() {
+        let maxlimit = 100;
+
+        let arrList = createArr(maxlimit);
+        let oddArrList = findOdd(arrList);
+        console.log(oddArrList);
+
+        let squareArrList = calculaSquare(oddArrList);
+        console.log(squareArrList);
+
+        let sum = calculaSum(squareArrList);
+        console.log(sum);
+    }
+    function createArr(maxLimit) {
+        let arrList = [];
+        for (let i = 0; i < maxLimit; i++)
+            arrList[i] = i;
+        return arrList;
+    }
+
+    function findOdd(arrList) {
+        let oddArrList = [], j = 0;
+        for (let i = 0; i < arrList.length; i++)
+            if (arrList[i] % 2 !== 0) {
+                oddArrList[j] = arrList[i];
+                j++;
+            }
+        return oddArrList;
+    }
+
+    function calculaSquare(oddArrList) {
+        let squareArrList = [];
+        for (let i = 0; i < oddArrList.length; i++)
+            squareArrList[i] = oddArrList[i] * oddArrList[i];
+        return squareArrList;
+    }
+
+    function calculaSum(squareArrList) {
+        let sum = 0;
+        for (let i = 0; i < squareArrList.length; i++)
+            sum += squareArrList[i];
+        return sum;
+    }
+
+    calculaSumOfSquare();
+
+</script>
+<body>
+
+</body>
+</html>

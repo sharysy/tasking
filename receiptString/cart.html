@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function mergerCartItem(cartItem) {
+            let result = [];
+            let count;
+            for (let i = 0; i < cartItem.length; i++) {
+                let existItem = result.find(function (item) {
+                    return item.barcode === cartItem[i].barcode
+                });
+                if (existItem) {
+                    existItem.count++;
+                }
+                else {
+                    result.push(Object.assign({}, cartItem[i], {count: 1}));
+
+                }
+            }
+            return result;
+
+        }
+        function calculaSubtotal(newCartItem) {
+            let result = [];
+            let subtotal;
+            for (let i = 0; i < newCartItem.length; i++) {
+                result.push(Object.assign({}, newCartItem[i], {subtotal: newCartItem[i].price * newCartItem[i].count}));
+            }
+            return result;
+
+        }
+        function calculaTotal(subtotalCartItem) {
+            let total = 0;
+            for (let i = 0; i < subtotalCartItem.length; i++)
+                total += subtotalCartItem[i].subtotal;
+            return total;
+        }
+        function print(subtotalCartItem, total) {
+            for (let i = 0; i < subtotalCartItem.length; i++)
+                document.write(" 名称：" + subtotalCartItem[i].name + "     数量：" + subtotalCartItem[i].count + subtotalCartItem[i].unit + "     单价：" + subtotalCartItem[i].price + "元     小计：" + subtotalCartItem[i].subtotal + '元<br>');
+            document.write("合计：" + total + '元<br>');
+
+        }
+        let cartItem = [{
+            barcode: "xd001",
+            name: "可口可乐",
+            unit: "瓶",
+            price: 3.00
+        },
+            {
+                barcode: "xd001",
+                name: "可口可乐",
+                unit: "瓶",
+                price: 3.00
+            },
+            {
+                barcode: "xd002",
+                name: "署条",
+                unit: "袋",
+                price: 4.5
+            }];
+        function printReceipt(cartItem) {
+
+            let newCartItem = mergerCartItem(cartItem);
+            let subtotalCartItem = calculaSubtotal(newCartItem);
+            let total = calculaTotal(subtotalCartItem);
+            print(subtotalCartItem, total);
+        }
+        printReceipt(cartItem);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
